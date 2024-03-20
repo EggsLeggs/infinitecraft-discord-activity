@@ -6,10 +6,10 @@ import OpenAI from "openai";
 import { defaultSystemMessage, defaultChips, defaultExamples } from "./consts";
 import { ChatCompletionCreateParamsNonStreaming, ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
-dotenv.config();
+dotenv.config({path: "../.env"})
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Generate formatted examples for chatGPT: format = [{role: "user", content: `${first} + ${second}`}, {role: "system", content: result}]
 var examples: ChatCompletionMessageParam[] = []
@@ -30,6 +30,29 @@ const completionParams: ChatCompletionCreateParamsNonStreaming = {
     n: 1,
     messages: []
 }
+
+app.post("/api/token", async (req: Request, res: Response) => {
+
+    // Exchange the code for an access_token
+    const response = await fetch(`https://discord.com/api/oauth2/token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        client_id: process.env.VITE_DISCORD_CLIENT_ID!,
+        client_secret: process.env.DISCORD_CLIENT_SECRET!,
+        grant_type: "authorization_code",
+        code: req.body.code,
+      }),
+    });
+
+  // Retrieve the access_token from the response
+  const { access_token } = await response.json();
+
+  // Return the access_token to our client as { access_token: "..."}
+  res.send({access_token});
+});
 
 app.get("/pair", (req: Request, res: Response) => {
     // TODO: check in mongoDB if the pair is already in the database
