@@ -1,0 +1,28 @@
+{
+    "name": "infinitecraft-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.ts",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "dev": "tsx watch src"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "express": "^4.19.0",
+        "openai": "^4.29.2"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.11.30",
+        "tsc": "^2.0.4",
+        "tsx": "^4.7.1",
+        "typescript": "^5.4.2"
+    }
+}
