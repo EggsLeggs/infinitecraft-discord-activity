@@ -1,0 +1,27 @@
+.game_container {
+  /* size is screen */
+  width:auto;
+  height: 100vh;
+  /* 3 column, 1 row grid */
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  overflow: hidden;
+}
+
+.playspace_container {
+  background-color: #c8748c;
+  height: 100vh;
+  max-height: 100vh;
+  width: auto;
+}
+
+.chips_container {
+  background-color: #bd5c6f;
+  height: 100vh;
+  width: auto;
+  flex-wrap: wrap;
+  display: flex;
+  align-content: start;
+  padding: 0.25rem;
+  overflow-y: scroll;
+}

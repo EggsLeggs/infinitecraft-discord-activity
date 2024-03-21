@@ -25,15 +25,15 @@ const AuthenticatedContext = React.createContext<any>({
     icon: null,
     description: '',
   },
-  guildMember: null,
+  // guildMember: null,
 });
 
 export function AuthenticatedContextProvider({children}: {children: React.ReactNode}) {
   const authenticatedContext = useAuthenticatedContextSetup();
 
-  if (authenticatedContext == null) {
-    return <LoadingScreen />;
-  }
+  // if (authenticatedContext == null) {
+  //   return <LoadingScreen />;
+  // }
 
   return <AuthenticatedContext.Provider value={authenticatedContext}>{children}</AuthenticatedContext.Provider>;
 }
@@ -51,10 +51,10 @@ function useAuthenticatedContextSetup() {
 
   React.useEffect(() => {
     const setUpDiscordSdk = async () => {
-      console.log('test2')
+      console.log('pre-ready test')
       console.log(import.meta.env.VITE_DISCORD_CLIENT_ID)
       await discordSdk.ready();
-      console.log('test')
+      console.log('post-ready test')
       console.log(import.meta.env.VITE_DISCORD_CLIENT_ID)
       // Authorize with Discord Client
       const {code} = await discordSdk.commands.authorize({
